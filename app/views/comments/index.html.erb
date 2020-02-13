@@ -11,7 +11,9 @@
     <div class="d-flex flex-column align-items-center m-3">
         <p class="font-weight-bold m-3"><%= comment.user.first_name + " " + comment.user.last_name %></p>
         <p class="m-3"><%= comment.content %></p>
+        <% if comment.user == current_user %>
         <p class="m-3"><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-outline-success" %></p>
+        <% end %>
       </div>
   <% end %>
   <div>

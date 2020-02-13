@@ -25,10 +25,6 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @comment = Comment.new
     @comments = @gossip.comments
-    puts "$" * 60
-    puts "Voici comments in show :"
-    puts @comments
-    puts "$" * 60
   end
 
   def edit

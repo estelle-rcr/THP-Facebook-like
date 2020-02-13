@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user, only: [:edit, :update, :destroy]
 
   def create
     @comments = @gossip.comments
@@ -33,6 +34,15 @@ end
     if @comment.destroy
       @comments = @gossip.comments
       render 'gossips/show'
+    end
+  end
+
+  private
+  def authenticate_user
+    @comment = Comment.find(params[:id])
+    unless @comment.user == current_user
+      flash[:danger] = "Sorry, it's not your comment. You can't edit or delete it."
+      redirect_to root_path
     end
   end
   

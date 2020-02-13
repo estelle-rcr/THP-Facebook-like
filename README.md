@@ -17,7 +17,7 @@ Install the bundle:
   
 Set up the database:
   `rails db:create`
-  `rails db:migrate`
+      `rails db:migrate`
   
 Seed the database:
   `rails db:seed`
@@ -72,8 +72,8 @@ The tables tags and likes are operational but the related features are not imple
  - log in as a user
  - log out
  - create a gossip and consult gossip (onyl if you're connected)
- - edit and delete your own gossip 
- - create comment, edit and delete them
+ - edit and delete you're the author of the gossip
+ - create comment, edit and delete them only if you're the one who wrotes them
 
  Not implemented yet:
  - Likes
