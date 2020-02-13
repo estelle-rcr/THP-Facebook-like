@@ -1,0 +1,37 @@
+    <div class="jumbotron">
+      <div class="container d-flex justify-content-center">
+        <img src="https://media.giphy.com/media/hQdWtl18ibA58nil8t/giphy.gif" class="img-fluid mr-5" alt="Responsive image">
+        <div class="d-flex flex-column">
+        <h1 class="mt-4 mb-4"> Welcome!</h1>
+        <p class="mt-4 mb-4">👉 Discover the best gossips of The Hacking Project here!</p>
+        </div>
+      </div>
+    </div>
+
+    <% if params[:commit] == "Create Gossip" %>
+      <p class="container alert alert-success d-flex justify-content-center m-4" role="alert">Your new gossip has been successfully saved!</p>
+    <% end %>
+    <% if params[:action] == "destroy" %>
+      <p class="container alert alert-success d-flex justify-content-center m-4" role="alert">The gossip was succesfully deleted!</p>  
+    <% end %>
+
+    <section class="container mt-4 mb-4">
+      <h4 class="text-center mt-4 mb-4">The current gossips are:</h4>
+      <% @gossips.each.with_index(1) do |gossip, index| %>
+      <div class="list-group m-4 justify-content-between">
+        <a href="<%=gossip_path(gossip.id)%>" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Gossip n°<%= index %></h5>
+          </div>
+          <p class="mb-1"><%= gossip.title %></p>
+          <small>Author: <%= gossip.author.first_name %></small>
+        </a>
+      </div>
+      <%end %>
+  </section>
+  <div class="text-center mt-3 mb-4 ml-3">
+    <h5 class="text-center mt-4 mb-4">Create a new gossip here:</h5>
+    <%= link_to "create a gossip", new_gossip_path, :class =>"btn btn-primary" %>
+    <br>
+  </div>
+

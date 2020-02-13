@@ -1,0 +1,16 @@
+<body>
+  <h1 class="h1 text-center mt-3 mb-4 ml-3">Get to know more about <%= @city.name %>!</h1>
+  <div  class="card-deck mx-4 d-flex justify-content-between">
+    <div class="card d-flex justify-content-between mx-4" style="width: 20rem;">
+      <div class="card-header">
+        Details of the city
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name of the city: <%= @city.name %></li>
+        <li class="list-group-item">Zip code: <%= @city.zip_code %></li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <p class="lead mt-3 mb-4 ml-3 text-center"><%= link_to "Return to the homepage", root_path, :class => "btn btn-primary" %></p>
+</body>

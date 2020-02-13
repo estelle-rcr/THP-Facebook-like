@@ -1,0 +1,27 @@
+<body>
+  <h1 class="h1 text-center mt-3 mb-4 ml-3">The author's page</h1>
+  <p class="lead text-center mt-3 mb-4 ml-3">Hi! It's <%= @author.first_name %>'s page! Check this out.</p>
+  <div  class="card-deck mx-4 d-flex justify-content-between">
+    <div class="card d-flex justify-content-between mx-4" style="width: 20rem;">
+      <div class="card-header">
+        My personal info
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">My firstname: <%= @author.first_name %></li>
+        <li class="list-group-item">My lastname: <%= @author.last_name %></li>
+        <li class="list-group-item">My age: <%= @author.age %></li>
+        <li class="list-group-item">Where I live:  <%= link_to "#{@author.city.name}", city_path(@author.city.id), :class => "card-link" %></li>
+      </ul>
+    </div>
+    <div class="card d-flex justify-content-between text-center mx-4" style="width: 20rem;">
+      <div class="card-header">
+        Get to know more about me:
+      </div>
+      <div class="mx-4 d-flex flex-column align-items-center">
+        <p class="text-center"><%= @author.description %></p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <p class="lead mt-3 mb-4 ml-3 text-center"><%= link_to "Return to homepage", root_path, :class => "btn btn-primary" %></p>
+</body>
