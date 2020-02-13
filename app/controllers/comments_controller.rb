@@ -1,17 +1,21 @@
 class CommentsController < ApplicationController
+
   def create
-    @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.create(content:params[:comment_content], user_id: User.all.sample, gossip_id: @gossip.id)
     @comments = @gossip.comments
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.new(content: params[:content], gossip_id: @gossip.id)
+    @comment.user = current_user
     if @comment.save
-      redirect_to root_path
+      redirect_to @gossip
     else 
+      flash[:danger] = "An error occured."
       render 'gossips/show'
   end
 end
 
   def edit
     @comment = Comment.find(params[:id])
+    @gossip = Gossip.find(params[:gossip_id])
   end
 
   def update

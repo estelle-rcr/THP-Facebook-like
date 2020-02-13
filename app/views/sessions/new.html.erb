@@ -1,0 +1,25 @@
+<h2 class="h1 mt-3 mb-4 ml-3 text-center">Welcome to our gossip community!</h2>
+<% if flash[:fail] %>
+<p class="container alert alert-danger d-flex justify-content-center m-4" role="alert"><%= flash[:fail] %></p>
+<% end %>
+<container class="d-flex justify-content-center">
+<div class="card bg-light mb-3" style="max-width: 46rem;">
+  <div class="card-header">Log in with your account:</div>
+  <div class="card-body">
+    <div class="container mt-5 form-group">
+      <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <%= label_tag 'Your email address, must be of the format xxxxx@yyy.zzz:' %>
+        <%= text_field_tag 'email', @user.email, class:'form-control' %>
+        <br /> <br />
+        <%= label_tag 'Your password:' %>
+        <%= text_field_tag 'password', @password, class:'form-control' %>
+        <br /> <br />
+        <input type="hidden" name="author" value=<%= User.all.sample.id %>>
+        <%= submit_tag "Log in", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</container>

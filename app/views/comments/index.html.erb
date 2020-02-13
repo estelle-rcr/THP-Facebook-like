@@ -1,6 +1,13 @@
+<container class="d-flex justify-content-center">
+<% if flash[:success] %>
+<p class="container alert alert-success d-flex justify-content-center m-4" role="alert"><%= flash[:success] %></p>
+<% elsif flash[:danger] %>
+<p class="container alert alert-danger d-flex justify-content-center m-4" role="alert"><%= flash[:danger] %></p>
+<% end %>
+</container>
 <div class="d-flex justify-content-center">
   <div class="m-auto">
-  <% @comments.sort_by(&:created_at).each do |comment| %>
+  <% @gossip.comments.each do |comment| %>
     <div class="d-flex flex-column align-items-center m-3">
         <p class="font-weight-bold m-3"><%= comment.user.first_name + " " + comment.user.last_name %></p>
         <p class="m-3"><%= comment.content %></p>
@@ -9,4 +16,8 @@
   <% end %>
   <div>
 </div>
+<% if @gossip.comments == nil %>
+  <p class="m-3">There is no comment yet. Add one!</ p>
+<% end %>
+
 

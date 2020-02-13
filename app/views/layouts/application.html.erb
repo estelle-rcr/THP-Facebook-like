@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,18 +19,38 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item active mr-4">
           <%= link_to "Home", root_path, :class => "nav-link"%>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mr-4">
           <%= link_to "Team", static_pages_team_path, :class => "nav-link"%>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mr-4">
           <%= link_to "Contact", static_pages_contact_path, :class => "nav-link"%>
         </li>
+      </ul>
+      <ul class="nav justify-content-end">
+        <% if current_user == nil %>
+        <li class="nav-item dropdown mr-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Create an account / Log in
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Create an account", new_user_path, :class => 'dropdown-item' %>
+            <%= link_to "Log in", new_session_path, :class => 'dropdown-item' %>
+          </div>
+        </li>
+        <% end %>
+        <% if current_user %>
+        <li class="nav-item mr-4">
+          <%= link_to "X Log out", session_path(session.id), :class => 'btn btn-outline-danger', data: {confirm: 'Do you confirm you want to log out?'}, method:"DELETE"%>
+        </li>
+        <% end %>
       </ul>
     </div>
     </nav>
   <%= yield %>
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 </body>
 </html>

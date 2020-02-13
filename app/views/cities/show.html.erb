@@ -1,7 +1,8 @@
 <body>
   <h1 class="h1 text-center mt-3 mb-4 ml-3">Get to know more about <%= @city.name %>!</h1>
-  <div  class="card-deck mx-4 d-flex justify-content-between">
-    <div class="card d-flex justify-content-between mx-4" style="width: 20rem;">
+  <container class="d-flex justify-content-center">
+  <div  class="card-deck mx-4" style="width: 28rem;">
+    <div class="card mx-4">
       <div class="card-header">
         Details of the city
       </div>
@@ -11,6 +12,7 @@
       </ul>
     </div>
   </div>
+  </container>
   <br>
   <p class="lead mt-3 mb-4 ml-3 text-center"><%= link_to "Return to the homepage", root_path, :class => "btn btn-primary" %></p>
 </body>

@@ -1,6 +1,9 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :show]
+  before_action :authenticate_author, only: [:edit, :update, :destroy]
+
   def index
-    @gossips = Gossip.all 
+    @gossips = Gossip.all
   end
 
   def new
@@ -8,8 +11,10 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new('title' => params[:title], 'content' => params[:content], 'author_id' => params[:author])
-    if @gossip.save
+    @gossip = Gossip.new('title' => params[:title], 'content' => params[:content])
+    @gossip.author = current_user
+    if @gossip.save 
+      flash[:success] = "Your gossip has been created!"
     redirect_to root_path
     else
     render 'new'
@@ -20,6 +25,10 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @comment = Comment.new
     @comments = @gossip.comments
+    puts "$" * 60
+    puts "Voici comments in show :"
+    puts @comments
+    puts "$" * 60
   end
 
   def edit
@@ -30,8 +39,8 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @gossip.update(title: params[:new_title], content: params[:new_content])
       if @gossip.update(title: params[:new_title], content: params[:new_content])
+        flash[:success] = "The gossip has been modified"
         redirect_to @gossip
-        flash.alert = "The gossip has been modified"
       else
         render :edit
       end
@@ -40,11 +49,27 @@ class GossipsController < ApplicationController
   def destroy
     @gossip = Gossip.find(params[:id])
     if @gossip.destroy
+      flash[:success] = "The gossip has been deleted"
       redirect_to root_path
-      flash.alert = "The gossip has been deleted"
     else 
       render 'show'
     end
   end
 
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def authenticate_author
+    @gossip = Gossip.find(params[:id])
+    unless @gossip.author == current_user
+      flash[:danger] = "Sorry, it's not your gossip. You can't edit or delete it."
+      redirect_to @gossip
+    end
+  end
 end

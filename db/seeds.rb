@@ -34,6 +34,7 @@ end
     description: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false),
     email: Faker::Internet.email, 
     age: Faker::Number.within(range: 16..90),
+    password: Faker::Code.asin,
     city: City.all.sample
     )
 end
