@@ -2,10 +2,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user, only: [:edit, :update, :destroy]
 
   def create
-    @comments = @gossip.comments
     @gossip = Gossip.find(params[:gossip_id])
     @comment = Comment.new(content: params[:content], gossip_id: @gossip.id)
     @comment.user = current_user
+    @comments = @gossip.comments
     if @comment.save
       redirect_to @gossip
     else 
