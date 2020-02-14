@@ -15,6 +15,15 @@
       </div>
     </div>
 
+    <container class="container d-flex justify-content-center">
+      <div class="card text-white bg-dark mt-4 mb-4 p-4" style="max-width: 28rem;">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h5 class="card-title mb-4">Create your own gossip here:</h5>
+          <%= link_to "CREATE A GOSSIP", new_gossip_path, :class =>"btn btn-light" %>
+        </div>
+      </div>
+    </container>
+
     <section class="container mt-4 mb-4">
       <h4 class="text-center mt-4 mb-4">The current gossips are:</h4>
       <% @gossips.sort_by(&:created_at).each do |gossip| %>
@@ -29,9 +38,5 @@
       </div>
       <%end %>
   </section>
-  <div class="text-center mt-3 mb-4 ml-3">
-    <h5 class="text-center mt-4 mb-4">Create a new gossip here:</h5>
-    <%= link_to "create a gossip", new_gossip_path, :class =>"btn btn-primary" %>
-    <br>
-  </div>
+
 
