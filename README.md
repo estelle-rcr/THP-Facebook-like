@@ -3,6 +3,9 @@
 This app is made as part of the bootcamp The Hacking Project. 
 It aims at creating a basic version of a Facebook-like website in Ruby on Rails and using Bootstrap to set up quickly the design. The website has been made in full respect of MVC's architecture and CRUD principles. 'Fat models, skinny controllers' have been respected as much as I could ;)
 
+The website is live on Heroku, please check: 
+https://the-gossip-network.herokuapp.com/ 
+
 ## The Ruby version 
 The ruby version used is 2.5.1.
 The rails version used is volontarily 5.2.3.
@@ -68,15 +71,15 @@ The tables tags and likes are operational but the related features are not imple
           `http://localhost:3000/user/3`
 
  * Features to be tested:
- - sign up as a user
+ - sign up as a user (with secured password using password digest)
  - log in as a user
- - log out
+- when creating an account or logging in, you can choose to be remembered: permanent cookies are created (with secured digest for the token)
+ - log out (+ cookies deletion)
  - create a gossip and consult gossip (onyl if you're connected)
  - edit and delete you're the author of the gossip
  - create comment, edit and delete them only if you're the one who wrotes them
 
+
  Not implemented yet:
  - Likes
  - Tags of gossip
-   
-
