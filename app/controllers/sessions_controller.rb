@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       log_in(@user)
+      if params[:keep_login] 
+        remember(@user)
+      end
       flash[:success] = "Welcome #{@user.first_name}, you're logged in!"
       redirect_to root_path
     else
@@ -17,7 +20,7 @@ class SessionsController < ApplicationController
 end
 
   def destroy 
-    session.delete(:user_id)
+    log_out(@user)
     flash[:success] = "You're logged out, bye!"
     redirect_to root_path
   end
